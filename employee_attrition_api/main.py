@@ -166,6 +166,9 @@ class EmployeeAttritionApp:
         self.btn_load_db = tk.Button(self.frame_top, text="Load from DB", command=self.load_from_db, bg="#4a90e2", fg="white")
         self.btn_load_db.pack(side=tk.LEFT, padx=10)
 
+        self.btn_logout = tk.Button(self.frame_top, text="Logout", command=self.logout, bg="#e94e77", fg="white")
+        self.btn_logout.pack(side=tk.RIGHT, padx=10)
+
         self.summary_label = tk.Label(root, text="", font=("Arial", 14), bg="#f0f4f8", fg="#333")
         self.summary_label.pack(pady=10)
 
@@ -177,6 +180,10 @@ class EmployeeAttritionApp:
 
         self.frame_bar = tk.LabelFrame(self.frame_charts, text="OverTime by Attrition", bg="white", font=("Arial", 12, "bold"))
         self.frame_bar.pack(side=tk.LEFT, expand=True, fill=tk.BOTH, padx=10, pady=10)
+
+    def logout(self):
+        self.root.destroy()
+        main_loop()
 
     def load_csv(self):
         filepath = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
@@ -244,12 +251,21 @@ class EmployeeAttritionApp:
         self.canvas_bar.draw()
         self.canvas_bar.get_tk_widget().pack(expand=True, fill=tk.BOTH)
 
-if __name__ == "__main__":
-    start_root = tk.Tk()
-    start_app = StartWindow(start_root)
-    start_root.mainloop()
+def launch_main_app():
+    root = tk.Tk()
+    app = EmployeeAttritionApp(root)
+    root.mainloop()
 
-    if start_app.logged_in:
-        root = tk.Tk()
-        app = EmployeeAttritionApp(root)
-        root.mainloop()
+def main_loop():
+    while True:
+        start_root = tk.Tk()
+        start_app = StartWindow(start_root)
+        start_root.mainloop()
+        if start_app.logged_in:
+            launch_main_app()
+            break
+        else:
+            break
+
+if __name__ == "__main__":
+    main_loop()
