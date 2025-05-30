@@ -1,0 +1,6 @@
+EmployeeID,Attrition,Department,JobRole,OverTime
+101,Yes,Sales,Sales Executive,Yes
+102,No,Research & Development,Research Scientist,No
+103,No,Human Resources,HR Manager,No
+104,Yes,Sales,Sales Representative,Yes
+105,No,Research & Development,Laboratory Technician,No
